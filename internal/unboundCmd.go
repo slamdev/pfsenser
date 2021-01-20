@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/slamdev/pfsenser/pkg/unbound"
 	"github.com/slamdev/pfsenser/pkg/xmlrpc"
@@ -80,7 +81,21 @@ var unboundGetCmd = &cobra.Command{
 			cmd.Printf("%s host is not found", args[0])
 			return nil
 		}
-		fmt.Printf("%+v\n", host)
+
+		format, err := getOutputFormat(cmd)
+		if err != nil {
+			return fmt.Errorf("failed to get output format; %w", err)
+		}
+		switch format {
+		case jsonFormat:
+			b, err := json.Marshal(host)
+			if err != nil {
+				return fmt.Errorf("failed to marshal json; %w", err)
+			}
+			fmt.Println(string(b))
+		case textFormat:
+			fmt.Printf("%+v\n", host)
+		}
 		return nil
 	},
 }
@@ -97,8 +112,21 @@ var unboundListCmd = &cobra.Command{
 			cmd.Println("no host overrides found")
 			return nil
 		}
-		for _, host := range hosts {
-			fmt.Printf("%+v\n", host)
+		format, err := getOutputFormat(cmd)
+		if err != nil {
+			return fmt.Errorf("failed to get output format; %w", err)
+		}
+		switch format {
+		case jsonFormat:
+			b, err := json.Marshal(hosts)
+			if err != nil {
+				return fmt.Errorf("failed to marshal json; %w", err)
+			}
+			fmt.Println(string(b))
+		case textFormat:
+			for _, host := range hosts {
+				fmt.Printf("%+v\n", host)
+			}
 		}
 		return nil
 	},
@@ -113,4 +141,5 @@ func init() {
 	unboundCmd.AddCommand(unboundDeleteCmd)
 	unboundCmd.AddCommand(unboundGetCmd)
 	unboundCmd.AddCommand(unboundListCmd)
+	outputFormatFlags(unboundGetCmd, unboundListCmd)
 }
