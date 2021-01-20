@@ -15,11 +15,20 @@ var unboundCmd = &cobra.Command{
 	TraverseChildren: true,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		url, err := cmd.Flags().GetString(urlFlagName)
+		if err != nil {
+			return fmt.Errorf("failed to parse %s flag; %w", urlFlagName, err)
+		}
 		username, err := cmd.Flags().GetString(usernameFlagName)
+		if err != nil {
+			return fmt.Errorf("failed to parse %s flag; %w", usernameFlagName, err)
+		}
 		password, err := cmd.Flags().GetString(passwordFlagName)
+		if err != nil {
+			return fmt.Errorf("failed to parse %s flag; %w", passwordFlagName, err)
+		}
 		insecure, err := cmd.Flags().GetBool(insecureFlagName)
 		if err != nil {
-			return fmt.Errorf("failed to parse flag; %w", err)
+			return fmt.Errorf("failed to parse %s flag; %w", insecureFlagName, err)
 		}
 		client, err = xmlrpc.NewPfsenseClient(url, username, password, insecure)
 		return err
@@ -85,7 +94,7 @@ var unboundListCmd = &cobra.Command{
 			return err
 		}
 		if len(hosts) == 0 {
-			cmd.Printf("no host overrides found", args[0])
+			cmd.Println("no host overrides found")
 			return nil
 		}
 		for _, host := range hosts {
