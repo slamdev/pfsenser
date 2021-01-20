@@ -12,9 +12,8 @@ const rootCmdName = "pfsenser"
 const verboseFlag = "verbose"
 
 var rootCmd = &cobra.Command{
-	Use:   rootCmdName,
-	Short: rootCmdName + " Describe CLI tool purpose here",
-	Long: rootCmdName + ` Describe CLI tool purpose here
+	Use: rootCmdName,
+	Long: `CLI wrapper on top of PfSense XML-RPC API
  Find more information at: https://github.com/slamdev/` + rootCmdName,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		verbose, err := cmd.Flags().GetBool(verboseFlag)
