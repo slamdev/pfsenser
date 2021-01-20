@@ -1,8 +1,8 @@
 build:
-	go build -o bin/golang-cli ./.
+	go build -o bin/pfsenser ./.
 
 run: build
-	./bin/golang-cli version
+	./bin/pfsenser version
 
 deps:
 	go mod verify
@@ -17,7 +17,7 @@ untag:
 	git fetch --tags
 	git tag -d $(TAG)
 	git push origin :refs/tags/$(TAG)
-	curl --request DELETE --header "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/repos/slamdev/golang-cli/releases/:release_id/$(TAG)"
+	curl --request DELETE --header "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/repos/slamdev/pfsenser/releases/:release_id/$(TAG)"
 
 test:
 	go test -v ./...

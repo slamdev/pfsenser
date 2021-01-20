@@ -1,4 +1,4 @@
-module github.com/slamdev/golang-cli
+module github.com/slamdev/pfsenser
 
 go 1.15
 

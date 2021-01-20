@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-const rootCmdName = "golang-cli"
+const rootCmdName = "pfsenser"
 
 const verboseFlag = "verbose"
 

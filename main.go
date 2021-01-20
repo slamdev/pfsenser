@@ -1,6 +1,6 @@
 package main
 
-import "github.com/slamdev/golang-cli/internal"
+import "github.com/slamdev/pfsenser/internal"
 
 func main() {
 	internal.ExecuteCmd()

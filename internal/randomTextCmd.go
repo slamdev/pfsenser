@@ -2,7 +2,7 @@ package internal
 
 import (
 	"fmt"
-	"github.com/slamdev/golang-cli/pkg"
+	"github.com/slamdev/pfsenser/pkg"
 	"github.com/spf13/cobra"
 )
 

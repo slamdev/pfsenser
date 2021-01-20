@@ -1,2 +1,3 @@
-# golang-cli
-Template for creating command line tool in golang
+# pfsenser
+
+CLI wrapper for pfSense XML-RPC API
