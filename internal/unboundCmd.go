@@ -96,7 +96,7 @@ var unboundListCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(unboundCmd)
+	RootCmd.AddCommand(unboundCmd)
 	connectionFlags(unboundCmd)
 	unboundCmd.AddCommand(unboundCreateCmd)
 	unboundCreateCmd.Flags().StringVar(&createDescription, "description", "", "host rule description")
