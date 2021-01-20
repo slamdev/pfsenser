@@ -9,7 +9,7 @@ builds:
     flags:
       - -trimpath
     ldflags:
-      - "-s -w -X internal.version={{.Version}}"
+      - "-s -w -X github.com/slamdev/{{ .ProjectName }}/internal.version={{ .Version }}"
     env:
       - CGO_ENABLED=0
     goos:
